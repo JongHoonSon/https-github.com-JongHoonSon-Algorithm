@@ -24,28 +24,29 @@ for(let i=0; i<N; i++) {
 
 BT(0);
 
+// 결과 값의 중복 제거
 const answerSet = new Set(answer);
 // console.log(answerSet);
+
+// 중복 제거 된 Set를 Array로 변환
 const answerArray = [...answerSet];
 console.log(answerArray.join('\n'));
 
-function BT(step, min) {
+function BT(step) {
     if(step === M) {
         answer.push(string.join(' '));
         return ;
     }
     
-    // 이전 단계에서 선택한 index 값부터 탐색
-    // 같은 수는 고를 수 있지만, 앞의 index의 수는 고를 수 없음
     for(let i=0; i<N; i++) {
+        // 중복을 고를 수 없으므로 check 사용
         if(check[i] === true) {
             continue;
         }
-
         string.push(values[i]);
         check[i] = true;
-        // 이전 단계에서 선택한 index 값 전달
-        BT(step+1, i);
+        // 오름차순으로 고르지 않아도 되므로 min 사용 x
+        BT(step+1);
         string.pop();
         check[i] = false;
     }
