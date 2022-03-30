@@ -12,6 +12,8 @@ let string = [];
 
 const answer = [];
 
+// 모든 요소에 대해 탐색을 해야하므로
+// 탐색 여부를 판단할 때 사용되는 check가 필요 없어진다.
 for(let i=0; i<N; i++) {
     values.push(i+1);
 }
