@@ -12,6 +12,7 @@ values.sort((a, b) => a - b);
 // console.log(M);
 // console.log(values);
 
+// 중복으로 선택할 수 있으므로 check 제거
 let check = [];
 let string = [];
 const answer = [];
