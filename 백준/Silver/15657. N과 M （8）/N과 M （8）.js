@@ -29,8 +29,11 @@ function BT(step, min) {
         return ;
     }
     
+    // 이전 단계에서 선택한 index 값부터 탐색
+    // 같은 수는 고를 수 있지만, 앞의 index의 수는 고를 수 없음
     for(let i=min; i<N; i++) {
         string.push(values[i]);
+        // 이전 단계에서 선택한 index 값 전달
         BT(step+1, i);
         string.pop();
     }
