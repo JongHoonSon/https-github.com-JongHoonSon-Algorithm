@@ -5,6 +5,7 @@ const N = +input[0].split(' ')[0];
 const M = +input[0].split(' ')[1];
 
 const values = input[1].split(' ');
+// 입력 값을 오름차순으로 정렬
 values.sort((a, b) => a - b);
 
 // console.log(N);
@@ -15,6 +16,7 @@ let check = [];
 let string = [];
 const answer = [];
 
+// 중복한 수를 고를 수 없으므로 check 사용
 for(let i=0; i<N; i++) {
     check[i] = false;
 }
