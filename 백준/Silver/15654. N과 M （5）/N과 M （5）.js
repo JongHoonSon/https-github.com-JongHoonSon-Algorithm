@@ -39,7 +39,7 @@ function BT(step) {
         }
         string.push(values[i]);
         check[i] = true;
-        BT(step+1, values[i]);
+        BT(step+1);
         string.pop();
         check[i] = false;
     }
