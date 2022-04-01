@@ -18,6 +18,8 @@ for(let i=0; i<C; i++) {
 // console.log(L);
 // console.log(C);
 // console.log(values);
+
+// 입력 받은 문자를 아스키 코드로 변환하여 Sorting 함
 values.sort((a, b) => a.charCodeAt() - b.charCodeAt());
 // console.log(values);
     
@@ -31,15 +33,21 @@ function BT(step, min) {
         let sumMo = 0;
         let sumJa = 0;
 
+        // string의 각 문자가 모음인지 자음인지 확인
         string.forEach(element => {
+
+            // 모음일 경우, 모음 갯수 ++
             if(moeum.includes(element)) {
                 // console.log(element);
                 sumMo++;
+
+            // 자음일 경우, 자음 갯수 ++
             } else {
                 sumJa++;
             }
         });
 
+        // 모음 갯수와 자음 갯수가 충족되면, answer에 추가
         if(sumMo >= 1 && sumJa >= 2) {
             answer.push(string.join(''));
         }
