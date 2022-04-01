@@ -12,9 +12,6 @@ while(true) {
     if(input[i] === '0') {
         break;
     }
-    if(i>=1) {
-        answer.push('');
-    }
 
     values = input[i].trim().split(' ').map(v=>+v);
     N = +values.shift();
@@ -27,6 +24,7 @@ while(true) {
     
     BT(0, 0);
 
+    answer.push('');
     i++;
 } 
 
