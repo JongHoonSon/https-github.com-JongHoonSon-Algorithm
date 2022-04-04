@@ -63,7 +63,7 @@ function BT(step, min) {
         return;
     }
 
-    // 중복된 수를 고르지 않도록 min 설정
+    // 오름차순으로 고르도록 min 설정
     for(let i=min; i<N; i++) {
         if(check[i] === true) {
             continue;
