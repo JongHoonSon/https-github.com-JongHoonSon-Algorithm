@@ -25,8 +25,8 @@ for(let i=1; i<N; i++) {
 
 console.log(minGap);
 
-function BT(step, min, count) {
-    if(step === count) {
+function BT(step, min, team1Num) {
+    if(step === team1Num) {
         // 로직
         
         // 팀1의 abil 값 abil1 를 구함
@@ -71,7 +71,7 @@ function BT(step, min, count) {
         }
         team1.push(i);
         check[i] = true;
-        BT(step+1, i, count);
+        BT(step+1, i, team1Num);
         team1.pop();
         check[i] = false;
     }
@@ -80,5 +80,12 @@ function BT(step, min, count) {
 
 // 문제 접근 방식
 
-// 총 N명의 인원을 반으로 나눌 수 있는 모든 경우의 수를 BT를 이용해 순열을 구한 후,
-// 양쪽팀의 abil(abillity) 를 구해서 차이를 비교하여 minGap에 넣는다.
+// 이번 문제는 이전 문제와 다르게 인원을 반으로 나누지 않고
+// 양팀을 구성하는 인원수가 차이나도 되므로,
+// 각 팀이 최소 1명의 인원을 가져야함을 고려할 때,
+// 팀 별로 가질 수 있원은 최대 1명에서 N-1명까지이다.
+
+// 따라서 BT에 team1의 인원을 나타내는 team1Num 매개변수를 추가하여
+// step === N/2 조건을 step === team1Num 로 변경하여
+// team1을 이루는 인원이 1명부터 N-1명까지 모든 조합을 찾고,
+// 그 조합 중에서 team2과 가장 abil 차이가 적은 값을 minGap에 저장한다.
