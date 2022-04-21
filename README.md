@@ -1,2 +1,2 @@
-# https-github.com-JongHoonSon-Algorihtm
+# https-github.com-JongHoonSon-Algorithm
 This is a auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
