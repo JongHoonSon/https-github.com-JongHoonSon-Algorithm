@@ -65,7 +65,7 @@ for (let i = 0; i < n; i++) {
   }
 }
 
-// 전체 칸에서 빈 칸을 제외한 칸(B)을 계산한다.
+// 전체 칸에서 빈 칸을 제외한 칸의 수(B)를 계산한다.
 let haveToPill = n * m - countEmptySpot;
 
 // A와 B가 같다면
@@ -101,10 +101,10 @@ function BFS() {
 
     // for문을 돌면서 새로 익은 토마토가 redTomate에 push되므로 배열의 길이가 증가한다.
     // 따라서 for문을 돌기전에 이번 day에 BFS를 진행할 토마토의 마지막 index 를 기억한다.
-    let todaysLastIndex = redTomato.length;
+    let todaysLastIndex = redTomato.length - 1;
 
     // 하루 단위로 BFS를 진행할 tomato이다.
-    for (let b = todaysFirstIndex; b < todaysLastIndex; b++) {
+    for (let b = todaysFirstIndex; b <= todaysLastIndex; b++) {
       const [i, j] = redTomato[idx++];
 
       for (let a = 0; a < moveX.length; a++) {
