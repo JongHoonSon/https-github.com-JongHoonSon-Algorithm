@@ -18,34 +18,34 @@ for (let i = 0; i < N; i++) {
   // console.log(`graph[${i}] : `, graph[i]);
 }
 
-let toBe = 2;
-let count = [];
+let townNum = 2;
+let townArr = [];
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < N; j++) {
-    if (DFS(i, j, toBe) === true) {
-      count.push(toBe);
-      toBe++;
+    if (DFS(i, j, townNum) === true) {
+      townArr.push(townNum);
+      townNum++;
     }
   }
 }
 
-console.log(count.length);
+console.log(townArr.length);
 
-let countEach = new Array(count.length).fill(0);
+let houseCntPerTownArr = new Array(townArr.length).fill(0);
 
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < N; j++) {
-    for (let k = 0; k < count.length; k++) {
-      if (graph[i][j] === count[k]) {
-        countEach[k]++;
+    for (let k = 0; k < townArr.length; k++) {
+      if (graph[i][j] === townArr[k]) {
+        houseCntPerTownArr[k]++;
       }
     }
   }
 }
 
-countEach.sort((a, b) => a - b);
+houseCntPerTownArr.sort((a, b) => a - b);
 
-console.log(countEach.join("\n"));
+console.log(houseCntPerTownArr.join("\n"));
 
 function DFS(i, j, toBe) {
   // console.log("i & j : ", i, j);
