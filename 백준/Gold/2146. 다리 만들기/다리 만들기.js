@@ -79,7 +79,8 @@ function BFS1(startI, startJ, landName) {
   // 시작점을 방문 예정 목록에 넣고, 방문 예약 처리함
   queue.push([startI, startJ]);
   willVisit[startI][startJ] = true;
-  // 시작점이 이미 방문되었거나, 바다인 경우는 위에서 걸러졌으므로,
+
+  // 시작점이 이미 방문 예약 되었거나, 바다인 경우는 위에서 걸러졌으므로,
   // 시작점은 무조건 육지일 수 밖에 없음.
   // 따라서 시작점의 graph 상 지명을 변경하고, island 배열에 넣음
   graph[startI][startJ] = landName;
@@ -103,11 +104,13 @@ function BFS1(startI, startJ, landName) {
           continue;
         }
 
+        // 현재 육지에서 상하좌우를 탐색한 노드가 육지일 경우
+        // 위에서 시작점에 대해 처리한 것과 같은 처리를 해줌
         if (graph[ni][nj] === 1) {
-          graph[ni][nj] = landName;
           queue.push([ni, nj]);
-          island.push([ni, nj]);
           willVisit[ni][nj] = true;
+          graph[ni][nj] = landName;
+          island.push([ni, nj]);
         }
       }
     }
@@ -135,6 +138,7 @@ for (let i = 0; i < n; i++) {
 BFS2();
 
 function BFS2() {
+  // 큐는 graph 상에 존재하는 모든 섬의 좌표가 저장되어 있는 island를 복사한 것임
   let queue = JSON.parse(JSON.stringify(island));
   let idx = 0;
 
@@ -144,6 +148,7 @@ function BFS2() {
     const lastIndex = queue.length - 1;
 
     for (let k = firstIndex; k <= lastIndex; k++) {
+      // 여기서 (i, j)는 섬의 좌표를 뜻함
       const [i, j] = queue[k];
       idx++;
 
@@ -157,8 +162,10 @@ function BFS2() {
           continue;
         }
 
+        // 해당 섬과 상하좌우로 붙어있는 곳이 바다이고, 방문 예약이 없다면
         if (graph[ni][nj] === 0 && willVisit[ni][nj] === false) {
-          graph[ni][nj] = String(graph[i][j]);
+          // 해당
+          graph[ni][nj] = graph[i][j];
           willVisit[ni][nj] = true;
           queue.push([ni, nj]);
           distance[ni][nj] = distance[i][j] + 1;
