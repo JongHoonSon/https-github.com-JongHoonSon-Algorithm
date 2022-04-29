@@ -1,8 +1,6 @@
 let fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
-// 인접행렬 만들기
-
 const [m, n] = input[0]
   .trim()
   .split(" ")
@@ -41,8 +39,6 @@ let answer = BFS(0, 0);
 
 if (n === 1 && m === 1 && graph[0][0] === 0) {
   console.log(0);
-} else if (n === 1 && m === 1 && graph[0][0] === 1) {
-  console.log(1);
 } else if (answer === false) {
   console.log(0);
 } else {
