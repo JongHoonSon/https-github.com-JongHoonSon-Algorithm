@@ -6,6 +6,8 @@ let input = fs
   .split("\n")
   .map((v) => +v);
 
+const testCaseNum = input.shift();
+
 // 1. 100만 이하의 수 중 소수 찾기
 let primeArray = new Array(1000001).fill(true);
 primeArray[1] = false;
