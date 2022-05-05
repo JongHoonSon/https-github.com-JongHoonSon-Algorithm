@@ -25,6 +25,7 @@ if (sisterNum !== 1) {
 console.log(gcd);
 
 // a와 b의 GCD(최대공약수) 구하기
+// (a와 b의 순서 상관x)
 function getGCD(a, b) {
   let temp;
 
