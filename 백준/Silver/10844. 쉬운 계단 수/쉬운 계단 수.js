@@ -1,7 +1,7 @@
 const fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString();
 
-input = Number(input);
+let N = Number(input);
 
 // console.log(input);
 
@@ -22,7 +22,7 @@ for (let i = 2; i < 11; i++) {
 // }
 // console.log(D[2][1]);
 
-for (let j = 1; j <= input; j++) {
+for (let j = 1; j <= N; j++) {
   for (let i = 1; i < 11; i++) {
     D[i][j] = BigInt(D[i - 1][j - 1]) + BigInt(D[i + 1][j - 1]);
   }
