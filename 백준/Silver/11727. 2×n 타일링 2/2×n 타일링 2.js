@@ -1,13 +1,13 @@
 const fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString().trim();
 
-input = Number(input);
+let N = Number(input);
 
 // console.log(DP(input));
 
 let memo = new Array(1001).fill(0);
 
-console.log(DP(input));
+console.log(DP(N));
 
 function DP(x) {
   if (x === 1) {
