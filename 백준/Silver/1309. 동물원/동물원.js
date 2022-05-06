@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString();
 
 input = +input;
@@ -13,10 +13,10 @@ D[0][1] = 1;
 D[1][1] = 1;
 D[2][1] = 1;
 
-for(let i=2; i<=100000; i++) {
-  D[0][i] = (D[0][i-1] + D[1][i-1] + D[2][i-1]) % 9901;
-  D[1][i] = (D[0][i-1] + D[2][i-1]) % 9901;
-  D[2][i] = (D[0][i-1] + D[1][i-1]) % 9901;
+for (let i = 2; i <= 100000; i++) {
+  D[0][i] = (D[0][i - 1] + D[1][i - 1] + D[2][i - 1]) % 9901;
+  D[1][i] = (D[0][i - 1] + D[2][i - 1]) % 9901;
+  D[2][i] = (D[0][i - 1] + D[1][i - 1]) % 9901;
 }
 
 // console.log(D[0][2]);
