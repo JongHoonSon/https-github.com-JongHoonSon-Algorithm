@@ -1,93 +1,67 @@
 const fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
-const testCaseNum = +input.shift();
+const N = +input.shift().trim();
 
-const inputArray = [];
+let A = [0];
 
-const inputLength = input.length;
-
-for (let i = 0; i < inputLength; i++) {
-  inputArray.push(+input.shift());
+for (let i = 0; i < N; i++) {
+  A.push(+input[i].trim());
 }
 
-// console.log(inputArray);
+// N이 1일 경우, 1번 포도주의 양 출력
+if (N === 1) {
+  console.log(A[1]);
+}
 
-// 입력을 저장할 A 배열
-// 마셨을 경우 또는 마시지 않았을 경우 해당 포도주까지의 최댓값을 기록하는 D 배열
+// N이 2일 경우, 1번 포도주와 2번 포도주의 양의 합 출력
+if (N === 2) {
+  console.log(A[1] + A[2]);
+}
 
-let A = new Array(2);
-let D = new Array(2);
+// N이 3이상일 경우
+if (N >= 3) {
+  let D = new Array(N + 1).fill(0);
 
-// i가 0일 때 = 마신 경우 (포도주의 양)
-// i가 1일 때 = 마시지 않은 경우 (0)
-A[0] = inputArray;
-A[1] = new Array(inputArray.length).fill(0);
-D[0] = inputArray;
-D[1] = new Array(inputArray.length).fill(0);
+  // 1번 포도주까지의 최댓값은 1번 포도주를 마시는 것
+  // => 1번 포도주의 양 출력
+  D[1] = A[1];
 
-console.log(D[0]);
-console.log(D[1]);
+  // 2번 포도주까지의 최댓값은 1번 포도주와 2번 포도주를 마시는 것
+  // => 1번 포도주와 2번 포도주의 양의 합 출력
+  D[2] = A[1] + A[2];
 
-// j는 0부터 N-1 반복
-for (let j = 0; j < testCaseNum; j++) {
-  // i는 1부터 0까지 감소하며 반복
-  for (let i = 1; i >= 0; i--) {
-    // 첫번째 포도주일 경우
-    if (j === 0) {
-      // 마신 경우
-      if (i === 1) {
-        // 첫번째 포도주의 값 저장
-        D[i][j] = D[i - 1][j];
-      }
-
-      // 두번째 포도주일 경우 경우
-    } else if (j === 1) {
-      // 마신 경우
-      if (i === 1) {
-        // 이전 포도주를 마시지 않은 경우와
-        // 이번 포도주를 마시지 않은 경우의 합
-        D[i][j] = D[i - 1][j - 1] + D[i - 1][j];
-      }
-
-      // 세번재 포도주일 경우
-    } else if (j === 2) {
-      // 안마신 경우
-      if (i === 0) {
-        // 이번 포도주를 마신 경우와 한번 건너뛰고 마신 경우
-        D[i][j] = D[i][j] + D[i + 1][j - 2];
-      } else if (i === 1) {
-        D[i][j] = D[i - 1][j] + D[i - 1][j - 1];
-      }
-
-      // 네번째
-    } else if (j >= 3) {
-      if (i === 0) {
-        D[i][j] = Math.max(
-          D[i][j] + D[i + 1][j - 2],
-          D[i][j] + D[i + 1][j - 3],
-          D[i][j] + D[i][j - 2],
-          D[i][j] + D[i][j - 3]
-        );
-      } else if (i === 1) {
-        D[i][j] = D[i - 1][j] + D[i - 1][j - 1];
-      }
-    }
+  // 3번 포도주부터는 아래 설명에 따라 최대로 마실 수 있는 양을 결정함
+  for (let i = 3; i <= N; i++) {
+    D[i] = Math.max(D[i - 1], D[i - 2] + A[i], D[i - 3] + A[i - 1] + A[i]);
   }
+
+  console.log(Math.max(...D));
 }
-
-// console.log(A[0]);
-// console.log(A[1]);
-// console.log(D[0]);
-// console.log(D[1]);
-
-const max0 = Math.max(...D[0]);
-const max1 = Math.max(...D[1]);
-
-console.log(Math.max(max0, max1));
 
 // 문제 풀이 접근 방식
 
 // 문제에서 주어진 '3잔 연속 마실 수 없다' 라는 조건을 해석하면 다음과 같다.
-// 1(o) => 2
-//      => 2
+// 1. 2잔은 연속으로 마실 수 있다.
+// 2. 1잔을 뛰어넘을 수 있다.
+// 3. 2잔은 뛰어넘지 않는 것이 더 좋다. (2잔 중 첫번 잔을 마시는 것과 차이 없음)
+
+// 예를 들어 5번 포도주까지 최대로 마실 수 있는 양은 아래와 같이 계산한다.
+
+//     2번   3번   4번    5번
+// 1.   ?     O     O     X
+// 2.   ?     O     X     O
+// 3.   ?     X     O     O
+
+// 1. 3번, 4번 포도주를 마신 경우 (5번 포도주는 PASS)
+// => 4번 포도주까지의 최대로 마신 포도주의 양
+
+// 2. 3번 포도주는 마시고, 4번 포도주는 안마신 경우 (5번 포도주 DRINK)
+// => 3번 포도주까지 최대로 마신 포도주의 양과
+//    이번에 마시는 5번 포도주의 양의 합
+
+// 3. 3번 포도주는 안마시고, 4번 포도주는 마신 경우 (5번 포도주 DRINK)
+// => 2번 포도주까지 최대로 마신 포도주의 양과
+//    4번 포도주의 양과 이번에 마시는 5번 포도주의 양의 합
+
+// 위 세가지 중에서 가장 큰 값이 5번 포도주까지 최대로 마실 수 있는 양이다.
