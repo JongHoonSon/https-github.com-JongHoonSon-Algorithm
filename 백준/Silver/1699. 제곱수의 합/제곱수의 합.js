@@ -1,9 +1,9 @@
 const fs = require("fs");
 let input = fs.readFileSync("./dev/stdin").toString();
 
-input = +input;
+let N = +input;
 
-let answer = DP(input);
+let answer = DP(N);
 
 console.log(answer);
 
