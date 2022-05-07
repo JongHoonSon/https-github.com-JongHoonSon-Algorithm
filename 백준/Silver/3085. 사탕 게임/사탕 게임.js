@@ -105,3 +105,9 @@ function getMaxConsec(array) {
 }
 
 console.log(totalMax);
+
+// 문제 풀이 접근 방식
+
+// 교환 가능한 모든 자리를 한 번씩 교환하면서
+// 그 때 마다의 가장 긴 연속 부분의 길이를 구하여,
+// 그 값이 최댓값이라면 totalMax에 저장하는 방식으로 푸는 브루트 포스 문제이다.
