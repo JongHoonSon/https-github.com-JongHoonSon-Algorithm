@@ -45,9 +45,12 @@ while (i !== targetNum) {
   i++;
 }
 
-// 1부터 9까지의 버튼이 고장났는지 확인하는 로직
-// -> 만일 1부터 9까지 버튼이 고장났을 경우, 특정 채널을 틀 수 없으므로, +- 버튼으로만 틀 수 있음
-// -> 0번 버튼은 넣어도되고 안넣어도 됨, 0으로는 어차피 0번 채널밖에 틀 수 없기 때문, 이것은 아래서 접근하는 것에서 이미 찾음
+// 1부터 9까지의 버튼이 모두 고장났는지 확인하는 로직
+// -> 만일 1부터 9까지 버튼이 모두 고장났을 경우,
+// 번호를 누르는 방식으로 특정 채널을 틀 수 없으므로, +- 버튼으로만 채널을 틀 수 있음
+
+// -> 0번 버튼은 넣어도되고 안넣어도 됨, 0번 버튼으로는 어차피 0번 채널밖에 틀 수 없기 때문,
+// 0번 채널은 이미 위에서 lowerMinNum을 구하는 과정에서 탐색했음
 let oneToNineBtnsAreBroken;
 for (let i = 1; i < 10; i++) {
   oneToNineBtnsAreBroken = true;
@@ -85,7 +88,7 @@ if (!oneToNineBtnsAreBroken) {
   }
 }
 
-hasBrokenBtn = false;
+let canAccessDirectly = false;
 
 // targetNum을 바로 틀 수 있는 경우(= targetNum을 트는데 필요한 버튼이 아무것도 고장나지 않은 경우)
 // console.log("brokenBtnArray.length", brokenBtnArray.length);
@@ -93,15 +96,15 @@ for (let j = 0; j < brokenBtnArray.length; j++) {
   // console.log("targetNum.toString()", targetNum.toString());
   // console.log("brokenBtnArray[j]", brokenBtnArray[j]);
   if (targetNum.toString().indexOf(brokenBtnArray[j]) !== -1) {
-    hasBrokenBtn = true;
+    canAccessDirectly = true;
     break;
   }
 }
 
 // targetNum을 바로 틀 수 있는 경우에는 targetNum의 길이가 버튼을 누르는 횟수가 된다.
-// 예를들어 1234 채널은 버튼 1,2,3,4를 눌러야하므로 4번이다.
+// 예를들어 1234 채널은 버튼 1,2,3,4를 눌러야하므로 버튼을 누르는 총 횟수는 4번이다.
 let onlyNumberBtn = Infinity;
-if (!hasBrokenBtn) {
+if (!canAccessDirectly) {
   onlyNumberBtn = targetNum.toString().length;
 }
 
