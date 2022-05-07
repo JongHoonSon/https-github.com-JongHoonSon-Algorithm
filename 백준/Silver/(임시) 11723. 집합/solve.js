@@ -1,5 +1,5 @@
-let fs = require('fs');
-let input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
+let fs = require("fs");
+let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
 const N = +input.shift();
 
@@ -7,44 +7,44 @@ const N = +input.shift();
 
 let array = [];
 
-for(let i=0; i<20; i++) {
-    array.push(0);
+for (let i = 0; i < 20; i++) {
+  array.push(0);
 }
 
-for(let i=0; i<N; i++) {
-    const line = input.shift().trim();
-    if(line === 'all') {
-        array = [];
-        for(let i=0; i<20; i++) {
-            array.push(1);
-        }
-    } else if(line === 'empty') {
-        array = [];
-        for(let i=0; i<20; i++) {
-            array.push(0);
-        }
-    } else {
-        const command = line.split(' ')[0]; 
-        const x = line.split(' ')[1]; 
-
-        if(command === "add") {
-            array[x-1] = 1;
-        } else if(command === "remove") {
-            array[x-1] = 0;
-        } else if(command === "check") {
-            if(array[x-1] === 1) {
-                console.log(1);
-            } else {
-                console.log(0);
-            }
-        } else if(command === "toggle") {
-            if(array[x-1] === 1) {
-                array[x-1] = 0;
-            } else {
-                array[x-1] = 1;
-            }
-        }
+for (let i = 0; i < N; i++) {
+  const line = input.shift().trim();
+  if (line === "all") {
+    array = [];
+    for (let i = 0; i < 20; i++) {
+      array.push(1);
     }
+  } else if (line === "empty") {
+    array = [];
+    for (let i = 0; i < 20; i++) {
+      array.push(0);
+    }
+  } else {
+    const command = line.split(" ")[0];
+    const x = line.split(" ")[1];
+
+    if (command === "add") {
+      array[x - 1] = 1;
+    } else if (command === "remove") {
+      array[x - 1] = 0;
+    } else if (command === "check") {
+      if (array[x - 1] === 1) {
+        console.log(1);
+      } else {
+        console.log(0);
+      }
+    } else if (command === "toggle") {
+      if (array[x - 1] === 1) {
+        array[x - 1] = 0;
+      } else {
+        array[x - 1] = 1;
+      }
+    }
+  }
 }
 
 // 풀이 접근 방식
