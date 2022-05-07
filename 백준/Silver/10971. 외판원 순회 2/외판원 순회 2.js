@@ -1,5 +1,5 @@
-let fs = require('fs');
-let input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
+let fs = require("fs");
+let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
 const N = +input.shift();
 let values = new Array(N);
@@ -8,10 +8,10 @@ let path = [];
 let sum = 0;
 let min = 5000000;
 
-for(let i=0; i<N; i++) {
-    values[i] = input[i].split(' ').map(v=>+v);
-    visited.push(false);
-    // console.log(values[i]);
+for (let i = 0; i < N; i++) {
+  values[i] = input[i].split(" ").map((v) => +v);
+  visited.push(false);
+  // console.log(values[i]);
 }
 
 // console.log(visited);
@@ -25,52 +25,52 @@ BT(0);
 console.log(min);
 
 function BT(step) {
-    if(step===N) {
-        // console.log("path : ", path);
-        // 첫 도시
-        const firstIndex = path[0];
-        // 마지막 도시
-        const lastIndex = path[path.length-1];
+  if (step === N) {
+    // console.log("path : ", path);
+    // 첫 도시
+    const firstIndex = path[0];
+    // 마지막 도시
+    const lastIndex = path[path.length - 1];
 
-        // 첫 도시에서 마지막 도시까지 방문할 때 드는 비용이 0인지 확인
-        for(let i=1; i<N; i++) {
-            if(values[path[i-1]][path[i]] === 0) {
-                return;
-            }
-        }
-        // 마지막 도시에서 첫 도시로 돌아올 때 드는 비용이 0인지 확인
-        if(values[lastIndex][firstIndex] === 0) {
-            return;
-        }
-
-        // 누적 값 초기화
-        sum = 0;
-
-        // 첫 도시에서 마지막 도시까지 방문할 때 드는 비용
-        for(let i=1; i<N; i++) {
-            sum = sum + values[path[i-1]][path[i]];
-        }
-
-        // 마지막 도시에서 첫 도시로 돌아올 때 드는 비용
-        sum = sum + values[lastIndex][firstIndex];
-
-        // 최솟값 갱신
-        if(sum < min) {
-            min = sum;
-        }
-        // console.log(sum);
+    // 첫 도시에서 마지막 도시까지 방문할 때 드는 비용이 0인지 확인
+    for (let i = 1; i < N; i++) {
+      if (values[path[i - 1]][path[i]] === 0) {
         return;
+      }
     }
-    for(let i=0; i<N; i++) {
-        if(visited[i] === true) {
-            continue;
-        }
-        path.push(i);
-        visited[i] = true;
-        BT(step+1);
-        path.pop();
-        visited[i] = false;
+    // 마지막 도시에서 첫 도시로 돌아올 때 드는 비용이 0인지 확인
+    if (values[lastIndex][firstIndex] === 0) {
+      return;
     }
+
+    // 누적 값 초기화
+    sum = 0;
+
+    // 첫 도시에서 마지막 도시까지 방문할 때 드는 비용
+    for (let i = 1; i < N; i++) {
+      sum = sum + values[path[i - 1]][path[i]];
+    }
+
+    // 마지막 도시에서 첫 도시로 돌아올 때 드는 비용
+    sum = sum + values[lastIndex][firstIndex];
+
+    // 최솟값 갱신
+    if (sum < min) {
+      min = sum;
+    }
+    // console.log(sum);
+    return;
+  }
+  for (let i = 0; i < N; i++) {
+    if (visited[i] === true) {
+      continue;
+    }
+    path.push(i);
+    visited[i] = true;
+    BT(step + 1);
+    path.pop();
+    visited[i] = false;
+  }
 }
 
 // 문제 풀이 접근 방식
