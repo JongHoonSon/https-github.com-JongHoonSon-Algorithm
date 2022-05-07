@@ -1,10 +1,10 @@
-let fs = require('fs');
-let input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
+let fs = require("fs");
+let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
-const N = +input[0].split(' ')[0];
-const M = +input[0].split(' ')[1];
+const N = +input[0].split(" ")[0];
+const M = +input[0].split(" ")[1];
 
-const values = input[1].split(' ');
+const values = input[1].split(" ");
 // 입력 값을 오름차순으로 정렬
 values.sort((a, b) => a - b);
 
@@ -31,17 +31,17 @@ const answerSet = new Set(answer);
 
 // 중복 제거 된 Set를 Array로 변환
 const answerArray = [...answerSet];
-console.log(answerArray.join('\n'));
+console.log(answerArray.join("\n"));
 
 function BT(step) {
-    if(step === M) {
-        answer.push(string.join(' '));
-        return ;
-    }
-    
-    for(let i=0; i<N; i++) {
-        string.push(values[i]);
-        BT(step+1);
-        string.pop();
-    }
+  if (step === M) {
+    answer.push(string.join(" "));
+    return;
+  }
+
+  for (let i = 0; i < N; i++) {
+    string.push(values[i]);
+    BT(step + 1);
+    string.pop();
+  }
 }

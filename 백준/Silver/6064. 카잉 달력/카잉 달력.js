@@ -1,54 +1,53 @@
-var fs = require('fs');
-var input = fs.readFileSync('./dev/stdin').toString().split('\n');
+var fs = require("fs");
+var input = fs.readFileSync("./dev/stdin").toString().split("\n");
 
 const testCaseNum = +input.shift();
 const answer = [];
 
-for(let j=0; j<testCaseNum; j++) {
-    const line = input[j];
-    const lineArray = line.split(' ').map(v=>+v);
-    // console.log(lineArray);
-    
-    let M = lineArray[0];
-    let N = lineArray[1];
-    let x = lineArray[2];
-    let y = lineArray[3];
-    
-    let last = lcm(N,M)
+for (let j = 0; j < testCaseNum; j++) {
+  const line = input[j];
+  const lineArray = line.split(" ").map((v) => +v);
+  // console.log(lineArray);
 
+  let M = lineArray[0];
+  let N = lineArray[1];
+  let x = lineArray[2];
+  let y = lineArray[3];
 
-    while(true){
-        if(x>last || y>last){  // 멸망
-            answer.push(-1)
-            break;
-        } else if(x>y){ //  // x가 더 크면 y를 더해줌. 
-            y+=N 
-        } else if(x<y){ //  y가 더 크면 x를 더해줌
-            x+=M
-        } else{         // x랑 y 가 같다면 그게 정답. 
-            answer.push(x)  
-            break;
-        }
+  let last = lcm(N, M);
+
+  while (true) {
+    if (x > last || y > last) {
+      // 멸망
+      answer.push(-1);
+      break;
+    } else if (x > y) {
+      //  // x가 더 크면 y를 더해줌.
+      y += N;
+    } else if (x < y) {
+      //  y가 더 크면 x를 더해줌
+      x += M;
+    } else {
+      // x랑 y 가 같다면 그게 정답.
+      answer.push(x);
+      break;
     }
+  }
 }
-  
-  //출력
-  console.log(answer.join('\n'))
-  
-  
-  //최대 공약수 구하기.
-  function gcd(a,b){
-    if(b==0) return a;
-    return a>b ? gcd(b,a%b) : gcd(a,b%a);
-  }
-  
-  //최대 공배수 구하기
-  function lcm(a,b){
-    return (a*b)/gcd(a,b);
-  }
 
+//출력
+console.log(answer.join("\n"));
 
+//최대 공약수 구하기.
+function gcd(a, b) {
+  if (b == 0) return a;
+  return a > b ? gcd(b, a % b) : gcd(a, b % a);
+}
 
+//최대 공배수 구하기
+function lcm(a, b) {
+  return (a * b) / gcd(a, b);
+}
 
 // 카잉 달력 후기
 

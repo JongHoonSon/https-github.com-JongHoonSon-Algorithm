@@ -1,12 +1,12 @@
-const fs = require('fs');
-let input = fs.readFileSync("./dev/stdin").toString().trim().split('\n');
+const fs = require("fs");
+let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
 const N = +input.shift();
 
 let board = new Array(N);
 
-for(let i=0; i<N; i++) {
-  board[i] = input[i].trim().split('');
+for (let i = 0; i < N; i++) {
+  board[i] = input[i].trim().split("");
   // console.log(board[i]);
 }
 
@@ -15,18 +15,18 @@ for(let i=0; i<N; i++) {
 // console.log(board.length);
 
 let totalMax = 0;
-let boardCopy = []
+let boardCopy = [];
 // 가로 방향으로 교환
-for(let i=0; i<N; i++) {
-  for(let j=0; j<N-1; j++) {
+for (let i = 0; i < N; i++) {
+  for (let j = 0; j < N - 1; j++) {
     boardCopy = JSON.parse(JSON.stringify(board));
 
-    if(boardCopy[i][j] === board[i][j+1]) {
+    if (boardCopy[i][j] === board[i][j + 1]) {
       continue;
     } else {
       const temp1 = boardCopy[i][j];
-      boardCopy[i][j] = boardCopy[i][j+1];
-      boardCopy[i][j+1] = temp1;
+      boardCopy[i][j] = boardCopy[i][j + 1];
+      boardCopy[i][j + 1] = temp1;
     }
 
     // console.log(boardCopy[0]);
@@ -42,16 +42,16 @@ for(let i=0; i<N; i++) {
 // console.log('--------');
 
 // 세로 방향으로 교환
-for(let i=0; i<N; i++) {
-  for(let j=0; j<N-1; j++) {
+for (let i = 0; i < N; i++) {
+  for (let j = 0; j < N - 1; j++) {
     boardCopy = JSON.parse(JSON.stringify(board));
 
-    if(boardCopy[j][i] === board[j+1][i]) {
+    if (boardCopy[j][i] === board[j + 1][i]) {
       continue;
     } else {
       const temp1 = boardCopy[j][i];
-      boardCopy[j][i] = boardCopy[j+1][i];
-      boardCopy[j+1][i] = temp1;
+      boardCopy[j][i] = boardCopy[j + 1][i];
+      boardCopy[j + 1][i] = temp1;
     }
 
     // console.log(boardCopy[0]);
@@ -68,10 +68,10 @@ function getMaxConsec(array) {
   let maxRow = 0;
 
   // 가로(행)
-  for(let i=0; i<array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let consec = 1;
-    for(let j=0; j<array.length-1; j++) {
-      if(array[i][j] === array[i][j+1]) {
+    for (let j = 0; j < array.length - 1; j++) {
+      if (array[i][j] === array[i][j + 1]) {
         consec++;
       } else {
         // console.log("i : ", i);
@@ -88,10 +88,10 @@ function getMaxConsec(array) {
   let maxCol = 0;
 
   // 세로(열)
-  for(let i=0; i<array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     let consec = 1;
-    for(let j=0; j<array.length-1; j++) {
-      if(array[j][i] === array[j+1][i]) {
+    for (let j = 0; j < array.length - 1; j++) {
+      if (array[j][i] === array[j + 1][i]) {
         consec++;
       } else {
         maxCol = Math.max(maxCol, consec);

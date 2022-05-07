@@ -1,33 +1,32 @@
-var fs = require('fs');
-var inputs = fs.readFileSync('./dev/stdin').toString().split('\n');
+var fs = require("fs");
+var inputs = fs.readFileSync("./dev/stdin").toString().split("\n");
 
-const NM = inputs.shift()
+const NM = inputs.shift();
 
-const N = +NM.split(' ')[0];
-const M = +NM.split(' ')[1];
+const N = +NM.split(" ")[0];
+const M = +NM.split(" ")[1];
 
 // console.log(N);
 // console.log(M);
 
-
 // 2차원 배열 A는 실제 N*M 배열보다 상하좌우로 +3씩 크게 설정한다.
 
-let A = new Array(N+6);
+let A = new Array(N + 6);
 
-for(let i=0; i<N+6; i++) {
-    A[i] = new Array(M+6).fill(0);
-    // console.log(A[i]);
+for (let i = 0; i < N + 6; i++) {
+  A[i] = new Array(M + 6).fill(0);
+  // console.log(A[i]);
 }
 
 // 2차원 배열 A의 가운데에 N*M 배열의 값을 넣는다.
 
-for(let i=3; i<N+3; i++) {
-    const line = inputs[i-3];
-    const lineArray = line.split(' ').map(v=>+v);
-    // console.log(lineArray);
-    for(let j=3; j<M+3; j++) {
-        A[i][j] = lineArray[j-3];
-    }
+for (let i = 3; i < N + 3; i++) {
+  const line = inputs[i - 3];
+  const lineArray = line.split(" ").map((v) => +v);
+  // console.log(lineArray);
+  for (let j = 3; j < M + 3; j++) {
+    A[i][j] = lineArray[j - 3];
+  }
 }
 
 // for(let i=0; i<N+6; i++) {
@@ -74,43 +73,41 @@ result.push(getMax(2, 3, [1, 0], [0, 1], [1, 1], [2, 1]));
 console.log(Math.max(...result));
 
 function getMax(width, height, one, two, three, four) {
-    // for(let i=0; i<N+6; i++) {
-    //     console.log(A[i]);
-    // }
-    let max = 0;
-    let sum = 0;
-    let block1;
-    let block2;
-    let block3;
-    let block4;
-    for(let i=0; i<N+6-height+1; i++) {
-        for(let j=0; j<M+6-width+1; j++) {
-            // console.log("i, j", i, j);
+  // for(let i=0; i<N+6; i++) {
+  //     console.log(A[i]);
+  // }
+  let max = 0;
+  let sum = 0;
+  let block1;
+  let block2;
+  let block3;
+  let block4;
+  for (let i = 0; i < N + 6 - height + 1; i++) {
+    for (let j = 0; j < M + 6 - width + 1; j++) {
+      // console.log("i, j", i, j);
 
-            // 각 블록의 위치에 들어있는 값을 저장한다.
-            block1 = A[i+one[0]][j+one[1]];
-            block2 = A[i+two[0]][j+two[1]];
-            block3 = A[i+three[0]][j+three[1]];
-            block4 = A[i+four[0]][j+four[1]];
+      // 각 블록의 위치에 들어있는 값을 저장한다.
+      block1 = A[i + one[0]][j + one[1]];
+      block2 = A[i + two[0]][j + two[1]];
+      block3 = A[i + three[0]][j + three[1]];
+      block4 = A[i + four[0]][j + four[1]];
 
-            // 블록 중에서 하나라도 0을 갖고 있으면 (즉, N x M 배열의 밖에 벗어나 있으면)
-            // 아무 것도 실행하지 않는다.
-            if(block1 === 0 || block2 === 0 || block3 === 0 || block4 === 0) {
-
-            // 모두 M*N 블록에 잘 들어와 있으면
-            // 각 블록의 합인 sum을 구하고 max를 갱신한다.
-            } else {
-                // console.log("block1, block2, block3, block4 : ", block1, block2, block3, block4);
-                sum = block1 + block2 + block3 + block4;
-                max = Math.max(max, sum);
-            }
-        }
+      // 블록 중에서 하나라도 0을 갖고 있으면 (즉, N x M 배열의 밖에 벗어나 있으면)
+      // 아무 것도 실행하지 않는다.
+      if (block1 === 0 || block2 === 0 || block3 === 0 || block4 === 0) {
+        // 모두 M*N 블록에 잘 들어와 있으면
+        // 각 블록의 합인 sum을 구하고 max를 갱신한다.
+      } else {
+        // console.log("block1, block2, block3, block4 : ", block1, block2, block3, block4);
+        sum = block1 + block2 + block3 + block4;
+        max = Math.max(max, sum);
+      }
     }
+  }
 
-    // 최종 max값을 반환한다.
-    return max;
+  // 최종 max값을 반환한다.
+  return max;
 }
-
 
 // 테트로미노 문제 풀이 접근 방식
 
@@ -128,9 +125,6 @@ function getMax(width, height, one, two, three, four) {
 
 // 5. 이때 테트로미노의 가로 세로 길이를 함수에 같이 전달하여 테트로미노가
 //    배열을 벗어나지 않고 모든 범위를 순회할 수 있도록 설정한다.
-
-
-
 
 // 후기
 
