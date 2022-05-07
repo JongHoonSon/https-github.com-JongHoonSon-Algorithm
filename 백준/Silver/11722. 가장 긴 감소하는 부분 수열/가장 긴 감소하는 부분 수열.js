@@ -21,3 +21,6 @@ for (let i = 1; i < A.length; i++) {
 // console.log(D);
 
 console.log(Math.max(...D));
+
+// 가장 긴 증가하는 부분 수열 문제와 다른 점은
+// 수열의 값이 증가하는 것이 아니라 감소한다는 것, 그것 하나 뿐이다.
