@@ -36,7 +36,7 @@ for (let i = 1; i < testCaseNum; i++) {
     } else {
       // D[i]는 i-1에서의 최대 연속합 또는 A[i] 중에서 큰 값을 취함
       // (D[i-1]도 음수, A[i]도 음수인데도
-      // D[i]에 0을 저장하지 않는 이유 : )
+      // D[i]에 0을 저장하지 않는 이유 : 주어진 모든 입력이 음수일 수 있기 때문)
       console.log("D[i-1]", D[i - 1]);
       console.log("A[i]", A[i]);
       D[i] = Math.max(D[i - 1], A[i]);
