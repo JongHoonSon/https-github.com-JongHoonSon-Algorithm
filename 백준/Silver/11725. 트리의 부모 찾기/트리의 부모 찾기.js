@@ -3,7 +3,7 @@ let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
 
 const N = +input.shift();
 
-// 그래프
+// 트리
 const tree = new Array(N + 1);
 
 // 각 노드의 부모 노드의 정보를 저장하는 배열
