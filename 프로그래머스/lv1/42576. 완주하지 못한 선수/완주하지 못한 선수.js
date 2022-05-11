@@ -1,24 +1,22 @@
 function solution(participant, completion) {
   var answer = "";
 
-  const cantCompleteMan = new Map();
+  const nameMap = new Map();
 
   participant.forEach((el) => {
-    if (!cantCompleteMan.get(el)) {
-      cantCompleteMan.set(el, 1);
+    if (!nameMap.has(el)) {
+      nameMap.set(el, 1);
     } else {
-      cantCompleteMan.set(el, cantCompleteMan.get(el) + 1);
+      nameMap.set(el, nameMap.get(el) + 1);
     }
   });
 
   completion.forEach((el) => {
-    if (cantCompleteMan.get(el)) {
-      cantCompleteMan.set(el, cantCompleteMan.get(el) - 1);
-    }
+    nameMap.set(el, nameMap.get(el) - 1);
   });
 
   participant.forEach((el) => {
-    if (cantCompleteMan.get(el) && cantCompleteMan.get(el) >= 1) {
+    if (nameMap.get(el) >= 1) {
       answer = el;
     }
   });
