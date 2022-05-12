@@ -25,3 +25,8 @@ function solution(array, commands) {
 
   return answer;
 }
+
+// 문제 풀이 접근 방식
+
+// 주어진 문자열에 대해 인덱스 상 i-1번째부터 j-1까지 자른 후,
+// 해당 문자열의 k-1번째 인덱스의 값을 출력하면 되는 쉬운 문제이다.
