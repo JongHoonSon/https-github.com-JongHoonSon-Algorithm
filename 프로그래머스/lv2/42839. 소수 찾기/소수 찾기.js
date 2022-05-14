@@ -81,3 +81,10 @@ function solution(numbers) {
 
   return answer;
 }
+
+// 문제 풀이 접근 방식
+
+// 주어진 문자열에 대해 만들 수 있는 최대 크기의 수까지 소수 여부를 판단한 isPrime 배열을 만들고,
+// BT를 이용해 주어진 문자열로 만들 수 있는 1부터 문자열의 길이까지의 길이의 수열을 구한 뒤,
+// 해당 수열이 소수인지를 isPrime으로 판단하고, 소수일 경우 primeArr에 push한다.
+// 최종적으로 primeArr의 길이를 answer에 저장하고 리턴하면 된다.
