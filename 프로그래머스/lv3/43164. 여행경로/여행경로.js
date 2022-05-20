@@ -3,7 +3,7 @@ function solution(tickets) {
 
   const sortedTickets = [...tickets].sort();
 
-  let visit = new Array(tickets.length).fill(0);
+  let visited = new Array(tickets.length).fill(0);
 
   DFS(sortedTickets, "ICN", [], 0);
 
@@ -16,14 +16,14 @@ function solution(tickets) {
     }
 
     for (let i = 0; i < tk.length; i++) {
-      if (visit[i] === 0 && tk[i][0] === start) {
-        visit[i] = 1;
+      if (visited[i] === 0 && tk[i][0] === start) {
+        visited[i] = 1;
 
         const result = DFS(tk, tk[i][1], route, depth + 1);
 
         if (result) return true;
 
-        visit[i] = 0;
+        visited[i] = 0;
         route.pop();
       }
     }
