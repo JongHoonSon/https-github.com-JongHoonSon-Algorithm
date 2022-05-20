@@ -17,3 +17,7 @@ function solution(s) {
 
   return answer;
 }
+
+// 후기
+
+// 문자열을 이루는 문자를 기준으로 내림차순으로 정렬하는 쉬운 문제였다.
