@@ -1,29 +1,30 @@
 function solution(tickets) {
   let answer;
 
-  const arr = [...tickets].sort();
+  const sortedTickets = [...tickets].sort();
+
   let visit = new Array(tickets.length).fill(0);
 
-  dfs(arr, "ICN", [], 0);
+  DFS(sortedTickets, "ICN", [], 0);
 
-  function dfs(tickets, start, res, cnt) {
-    res.push(start);
+  function DFS(tk, start, route, depth) {
+    route.push(start);
 
-    if (cnt === tickets.length) {
-      answer = res;
+    if (depth === tk.length) {
+      answer = route;
       return true;
     }
 
-    for (let i = 0; i < tickets.length; i++) {
-      if (visit[i] === 0 && tickets[i][0] === start) {
+    for (let i = 0; i < tk.length; i++) {
+      if (visit[i] === 0 && tk[i][0] === start) {
         visit[i] = 1;
 
-        const result = dfs(tickets, tickets[i][1], res, cnt + 1);
+        const result = DFS(tk, tk[i][1], route, depth + 1);
 
         if (result) return true;
 
         visit[i] = 0;
-        res.pop();
+        route.pop();
       }
     }
     return false;
