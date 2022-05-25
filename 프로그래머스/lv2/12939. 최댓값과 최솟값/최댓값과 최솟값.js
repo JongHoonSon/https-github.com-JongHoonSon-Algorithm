@@ -22,3 +22,8 @@ function solution(s) {
 
   return answer;
 }
+
+// 문제 풀이 접근 방식
+
+// 문제에서 주어진 문자열을 split을 이용해 배열로 만든 뒤,
+// 각 배열 요소를 확인하며 max값과 min값을 갱신하면 되는 문제이다.
