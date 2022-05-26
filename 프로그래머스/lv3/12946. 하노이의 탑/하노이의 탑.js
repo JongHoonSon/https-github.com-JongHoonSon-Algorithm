@@ -21,3 +21,7 @@ function solution(n) {
 
   return answer;
 }
+
+// 문제 풀이 접근 방식
+
+// 백준 silver 11729번 하노이 탑 문제 확인
