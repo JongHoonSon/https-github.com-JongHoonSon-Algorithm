@@ -33,13 +33,44 @@ function solution(n) {
 
   function isValid(board, row) {
     for (let i = 1; i < row; i++) {
+      // 1. 같은 열에 이미 퀸이 존재하는지 확인
+
+      // row의 위에 있는 i번째 행에 놓은 퀸의 열 값(board[i])과
+      // 현재 놓은 퀸의 열 값(board[row])이 일치한다면 false 리턴
+      // (= 같은 열에 이미 퀸이 존재하는 상태)
       if (board[i] === board[row]) {
         return false;
       }
+
+      // 2. 대각선 상에 이미 퀸이 존재하는지 확인
+
+      // row의 위에 있는 i번째 행에 놓은 퀸의 열 값(board[i])과
+      // 현재 놓은 퀸의 열 값(board[row])의 차이가
+      // i번째 행과 현재 행의 차이와 같다면
+
+      // ex) 1 0 0 0
+      //     0 1 0 0
+      //     0 0 0 0
+      //     0 0 0 0
+
+      // 값이 1인 곳에 퀸이 위치한다고 했을 때
+
+      // 열 값
+      // board[1] = 1
+      // board[2] = 2
+
+      // 행 값
+      // i = 1;
+      // row = 2;
+
+      // 열 값의 차이 = 행 값의 차이이므로 대각선 상에 이미 퀸이 존재하는 것이므로 false리턴
+
       if (Math.abs(board[i] - board[row]) === Math.abs(i - row)) {
         return false;
       }
     }
+
+    // 위 두 조건에 걸리지 않은 경우, 놓을 수 있는 경우로, true 리턴
     return true;
   }
 
