@@ -1,8 +1,6 @@
 function solution(k, dungeons) {
   var answer = -1;
 
-  dungeons.sort((a, b) => a[1] - b[1]);
-
   let results = [];
 
   let check = new Array(dungeons.length).fill(false);
