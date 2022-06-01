@@ -1,28 +1,117 @@
 function solution(word) {
   let answer = 0;
-  // 종 문자열 길이
-  let length = word.length;
-  // 종류의 수
+
+  // 주어진 문자열의 길이
+  let wordLength = word.length;
+
+  // 사용할 수 있는 문자의 가짓수
   let numberOfWords = 5;
-  // 경우의 수 총합
+
+  // 주어진 문자로 만들 수 있는 문자열의 총 갯수
   let max = 0;
+
+  // 주어진 문자로 만들 수 있는 문자열의 총 갯수는
+  // 문자의 가짓수를
+  // 만들 수 있는 모든 문자열의 길이로 제곱한 수의
+  // 합이다.
+
+  // ex) 5개의 문자로 만들 수 있는 문자열의 길이는 1,2,3,4,5이다.
+  // 따라서 5개의 문자로 만들 수 있는 문자열의 총 갯수는
+
+  // 길이가 1인 문자열의 갯수 : 5^1 = 5
+  // 길이가 2인 문자열의 갯수 : 5^2 = 25
+  // 길이가 3인 문자열의 갯수 : 5^3 = 125
+  // 길이가 4인 문자열의 갯수 : 5^4 = 625
+  // 길이가 5인 문자열의 갯수 : 5^5 = 3125
+
+  // 총 갯수는 3905개 이다.
   for (let i = 1; i <= numberOfWords; i++) {
     max += Math.pow(numberOfWords, i);
   }
-  //  ['A', 'E', 'I', 'O', 'U'] 순서 [0, 1, 2, 3, 4]
-  for (let i = 1; i <= length; i++) {
+
+  // 특정 문자열이 몇번째로 등장한 문자열인지 찾는 방법은 다음과 같다.
+
+  // 먼저 각 문자의 등장 서열은 다음과 같다.
+
+  // A : 0
+  // E : 1
+  // I : 2
+  // O : 3
+  // U : 4
+
+  // 그리고 각 자릿수에 대해 문자가 교체되는 주기는 다음과 같다.
+
+  // 첫 번째 자리 : 간격 781 (3905 / 5)
+  // 두 번째 자리 : 간격 156 (3905 / 25)
+  // 세 번째 자리 : 간격 31 (3905 / 125)
+  // 네 번째 자리 : 간격 6 (3905 / 625)
+  // 다섯 번째 자리 : 간격 1 (3905 / 3125)
+
+  // AAAA와 AAAE는 4번째 자리가 다르므로, 두 문자열의 간격은 6(4번째 자리의 간격 단위) x 1(문자 E의 등장 서열) = 6 이다.
+
+  // 실제로 두 문자열의 등장 순서는 다음과 같다.
+
+  //   A        1
+  //   AA       2
+  //   AAA      3
+  //   AAAA     *4
+  //   AAAAA    5
+  //   AAAAE    6
+  //   AAAAI    7
+  //   AAAAO    8
+  //   AAAAU    9
+  //   AAAE     *10
+
+  // AAAA는 4, AAAE는 10 이므로 위의 논리가 맞다는 것을 알 수 있다.
+
+  // 이제 문제에서 주어진 문자열이, 만들 수 있는 문자열 상에서 몇번째인지 구하기 위해서는
+  // 위에서 정리한 논리를 적용시켜,
+  // 0번째 문자열인 ''(공백)과 각 자리에 들어온 문자 간의 간격을 계산하면 된다.
+
+  // 0번째 문자열인 ''(공백)과 word의 간격을 저장할 변수
+  let gap = 0;
+
+  // 입력으로 주어진 word의 첫 번째 자리부터 마지막 자리까지 반복
+  // (각 자리는 i번째 자리로 나타낼 수 있음)
+  for (let i = 1; i <= wordLength; i++) {
+    // i번째 자리의 문자가 무엇인지 찾음
+
+    // A라면 언제 붙던지 간에 지금까지 계산한 간격에 +1하면 된다.
+    // ex) AE 다음에 A가 붙는다면, AEA 는 AE 다음의 문자열이므로 +1 하면 된다.
     if (word.charAt(i - 1) == "A") {
-      answer += 1;
+      gap += 1;
+
+      // E라면 해당 i번째 자리의 간격(문자의 갯수의 i제곱)을 계산하고 문자 E의 등장 서열인 1을 곱한 후, 1을 더한다.
+      // (1을 더하는 이유 :
+      // AAA 에서 다음 문자를 읽었는데 해당 문자가 'E'인 경우
+      // AAAE 는 AAAA 와 간격 6개가 차이나는 것이므로
+      // AAA와 AAAE는 간격 7개가 차이남, 따라서 1을 더 해줌)
     } else if (word.charAt(i - 1) == "E") {
-      answer += Math.floor(max / Math.pow(numberOfWords, i)) * 1 + 1;
+      gap += Math.floor(max / Math.pow(numberOfWords, i)) * 1 + 1;
+
+      // I라면 해당 i번째 자리의 간격(문자의 갯수의 i제곱)을 계산하고 문자 I의 등장 서열인 2을 곱한 후, 1을 더한다.
     } else if (word.charAt(i - 1) == "I") {
-      answer += Math.floor(max / Math.pow(numberOfWords, i)) * 2 + 1;
+      gap += Math.floor(max / Math.pow(numberOfWords, i)) * 2 + 1;
+
+      // O라면 해당 i번째 자리의 간격(문자의 갯수의 i제곱)을 계산하고 문자 O의 등장 서열인 3을 곱한 후, 1을 더한다.
     } else if (word.charAt(i - 1) == "O") {
-      answer += Math.floor(max / Math.pow(numberOfWords, i)) * 3 + 1;
+      gap += Math.floor(max / Math.pow(numberOfWords, i)) * 3 + 1;
+
+      // U라면 해당 i번째 자리의 간격(문자의 갯수의 i제곱)을 계산하고 문자 U의 등장 서열인 4을 곱한 후, 1을 더한다.
     } else {
-      answer += Math.floor(max / Math.pow(numberOfWords, i)) * 4 + 1;
+      gap += Math.floor(max / Math.pow(numberOfWords, i)) * 4 + 1;
     }
   }
 
+  answer = gap;
+
   return answer;
 }
+
+// 후기
+
+// 패턴 찾기 문제인데, 생각보다 패턴이 복잡해서 구글링을 통해 문제 풀이 접근 방식을 찾아보았다.
+
+// 문제 풀이 접근 방식
+
+//
