@@ -68,3 +68,7 @@ function solution(maps) {
 
   return answer;
 }
+
+// 문제 풀이 접근 방식
+
+// BFS를 이용해 최단거리를 구하는 전형적인 문제이다.
