@@ -8,8 +8,6 @@ function solution(sticker) {
     return answer;
   }
 
-  let lastIndex = sticker.length - 1;
-
   let memo = new Array(sticker.length).fill(0);
 
   memo[0] = sticker[0];
