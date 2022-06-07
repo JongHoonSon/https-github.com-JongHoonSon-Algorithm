@@ -1,11 +1,16 @@
 function solution(w, h) {
   var answer = 1;
-  for (i = 1; i < Math.max(w, h) + 1; i++) {
-    let result = 1;
-    if (w % i == 0 && h % i == 0) {
-      result = i;
-    }
-    answer = Math.max(answer, result);
+
+  answer = w * h - (w + h - getGCD(w, h));
+
+  return answer;
+}
+
+function getGCD(a, b) {
+  while (b > 0) {
+    let r = a % b;
+    a = b;
+    b = r;
   }
-  return w * h - (w + h - answer);
+  return a;
 }
