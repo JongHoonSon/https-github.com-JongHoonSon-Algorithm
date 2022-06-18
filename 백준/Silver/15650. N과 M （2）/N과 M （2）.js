@@ -42,9 +42,9 @@ function BT(step, min) {
     string.push(values[i]);
     check[i] = true;
 
-    // 다음 함수를 호출할 때 현재 단계에서 선택한 수 value[i]를 넘긴다.
-    // 이로 인해 다음 함수는 value[i]이후부터 탐색하게 된다.
-    BT(step + 1, values[i]);
+    // 다음 함수를 호출할 때 현재 단계에서 선택한 수의 인덱스의 다음 인덱스인 i+1를 넘긴다.
+    // 이로 인해 다음 함수는의 현재 선택한 인덱스의 다음 인덱스인 i+1부터 탐색하게 된다.
+    BT(step + 1, i + 1);
     string.pop();
     check[i] = false;
   }
