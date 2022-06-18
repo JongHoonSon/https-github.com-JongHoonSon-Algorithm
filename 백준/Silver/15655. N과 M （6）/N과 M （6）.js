@@ -1,10 +1,10 @@
-let fs = require("fs");
-let input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
+let fs = require('fs');
+let input = fs.readFileSync('./dev/stdin').toString().trim().split('\n');
 
-const N = +input[0].split(" ")[0];
-const M = +input[0].split(" ")[1];
+const N = +input[0].split(' ')[0];
+const M = +input[0].split(' ')[1];
 
-const values = input[1].split(" ");
+const values = input[1].split(' ');
 // 입력 값을 오름차순으로 정렬
 values.sort((a, b) => a - b);
 
@@ -17,36 +17,30 @@ let string = [];
 const answer = [];
 
 // 중복한 수를 고를 수 없으므로 check 사용
-for (let i = 0; i < N; i++) {
-  check[i] = false;
+for(let i=0; i<N; i++) {
+    check[i] = false;
 }
 
 // console.log(check);
 
 BT(0, 0);
 
-console.log(answer.join("\n"));
+console.log(answer.join('\n'));
 
 function BT(step, min) {
-  if (step === M) {
-    answer.push(string.join(" "));
-    return;
-  }
-
-  // 전 단계의 선택한 값의 index부터 탐색 시작
-  // 어차피 전 단계에서 찾은 값은 check에서 걸러지므로
-  // 아예 index의 다음값 (min+1) 부터 탐색해도 됨.
-  // 대신 처음 호출하는 BT(0, 0)을 BT(0, -1)로 바꿔야 함.
-  for (let i = min + 1; i < N; i++) {
-    if (check[i] === true) {
-      continue;
+    if(step === M) {
+        answer.push(string.join(' '));
+        return ;
     }
-    string.push(values[i]);
-    check[i] = true;
 
-    // 각 단계에서 찾은 값의 index 값(i)을 호출되는 함수에 전달
-    BT(step + 1, i);
-    string.pop();
-    check[i] = false;
-  }
+    for(let i=min; i<N; i++) {
+        if(check[i] === true) {
+            continue;
+        }
+        string.push(values[i]);
+        check[i] = true;
+        BT(step+1, i);
+        string.pop();
+        check[i] = false;
+    }
 }
