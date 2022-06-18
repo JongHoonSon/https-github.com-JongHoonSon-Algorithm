@@ -19,7 +19,7 @@ for (let i = 0; i < N; i++) {
 // console.log(values);
 // console.log(check);
 
-BT(0, 1);
+BT(0, 0);
 
 console.log(answer.join("\n"));
 
@@ -29,14 +29,12 @@ function BT(step, min) {
     return;
   }
 
-  // 이전 함수로부터 받은 min 값의 -1을 해서
-  // for문의 시작 값으로 사용한다. values[i] 는 값이고, i는 index 임을 고려
-  // 아예 처음부터 i를 전달하고 let i=min 으로 사용해도 된다.
-  for (let i = min - 1; i < N; i++) {
+  // 이전 함수로부터 받은 i값을 for문의 시작 값으로 사용한다.
+  for (let i = min; i < N; i++) {
     string.push(values[i]);
     // 오름차순으로 정렬하기 위해
-    // 각 단계에서 찾은 값 value[i]을 다음 함수에 전달한다.
-    BT(step + 1, values[i]);
+    // 각 단계에서 찾은 값의 인덱스인 i를 다음 함수에 전달한다.
+    BT(step + 1, i);
     string.pop();
   }
 }

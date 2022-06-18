@@ -34,10 +34,7 @@ function BT(step, min) {
   }
 
   // 전 단계의 선택한 값의 index부터 탐색 시작
-  // 어차피 전 단계에서 찾은 값은 check에서 걸러지므로
-  // 아예 index의 다음값 (min+1) 부터 탐색해도 됨.
-  // 대신 처음 호출하는 BT(0, 0)을 BT(0, -1)로 바꿔야 함.
-  for (let i = min + 1; i < N; i++) {
+  for (let i = min; i < N; i++) {
     if (check[i] === true) {
       continue;
     }
