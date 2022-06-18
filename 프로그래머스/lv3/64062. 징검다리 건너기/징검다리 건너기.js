@@ -1,6 +1,10 @@
 function checkStone(stones, mid, k) {
   let consec = 0;
+
+  // 모든 디딤돌에 대해 반복하며
+  // mid 보다 작은 값이 k번이상 나오는지 확인
   for (let i = 0; i < stones.length; i++) {
+    // stones[i]가 mid보다 값이 작다면, mid번 징검다리를 건널 때 0이 되는 수
     if (stones[i] < mid) {
       consec += 1;
     } else {
