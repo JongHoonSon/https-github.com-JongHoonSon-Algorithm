@@ -1,7 +1,9 @@
 function solution(genres, plays) {
   var answer = [];
 
-  // 1. 각 곡을 장르별로 분류
+  // 1. 장르를 key로 갖고,
+  // 해당 장르에 속하는 곡을 배열 형태의 value로 갖는
+  // Map 생성
 
   let genresMap = new Map();
 
@@ -19,7 +21,7 @@ function solution(genres, plays) {
 
   console.log("--------");
 
-  // 2. 각 장르를 배열 형태로 변경
+  // 2. Map을 Array로 변환함
 
   let genresArr = Array.from(genresMap, ([name, arr]) => ({ name, arr }));
 
@@ -34,7 +36,7 @@ function solution(genres, plays) {
 
   console.log("--------");
 
-  // 3. 각 장르에 들어있는 곡을 play 값으로 정렬
+  // 3. 각 장르에 속하는 곡을 play 값으로 정렬
 
   genresArr.forEach((el) => {
     el.arr.sort((a, b) => {
@@ -53,7 +55,8 @@ function solution(genres, plays) {
 
   console.log("--------");
 
-  // 4. 각 장르에 들어있는 곡의 재생횟수의 합(=장르별 재생횟수)을 기준으로 장르를 정렬
+  // 4. 각 장르를 각 장르에 속하는 곡의 play 값의 합(=장르별 재생횟수)을
+  // 기준으로 정렬함
 
   genresArr.sort((a, b) => {
     let sumA = 0;
