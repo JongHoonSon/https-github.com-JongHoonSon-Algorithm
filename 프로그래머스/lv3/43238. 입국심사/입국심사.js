@@ -14,7 +14,7 @@ function solution(n, times) {
   let minDays = right;
 
   // 이분 탐색의 진행 조건
-  while (left <= right) {
+  while(left < right-1) {
     // left와 right의 중간에 mid를 설정
     let mid = Math.floor((left + right) / 2);
 
@@ -34,9 +34,9 @@ function solution(n, times) {
 
     // totalPersonCnt에 따라 새로운 이분탐색을 위한 left, right값 조정
     if (totalPersonCnt >= n) {
-      right = mid - 1;
+      right = mid;
     } else {
-      left = mid + 1;
+      left = mid;
     }
   }
 
