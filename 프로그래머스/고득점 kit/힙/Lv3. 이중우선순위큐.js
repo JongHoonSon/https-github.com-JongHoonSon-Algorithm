@@ -3,18 +3,18 @@ function solution(operations) {
 
   let stack = [];
 
-  // 모든 명령어를 꺼냄
+  // 1. 모든 명령어에 대해 반복
   for (let i = 0; i < operations.length; i++) {
     // command는 명령어
     // value는 값
     let [command, value] = operations[i].split(" ");
 
-    // 명령어가 I라면
+    // 2. 명령어가 I라면
     if (command === "I") {
       // value를 스택에 넣음
       stack.push(+value);
 
-      // 명령어가 D이고
+      // 3. 명령어가 D이고
     } else if (command === "D") {
       // 값이 1이라면
       if (+value === 1) {
@@ -32,7 +32,7 @@ function solution(operations) {
       }
     }
 
-    // 스택을 오름차순으로 정렬
+    // 4. 스택을 오름차순으로 정렬함
     if (stack.length > 1) {
       stack.sort((a, b) => a - b);
     }
@@ -40,12 +40,12 @@ function solution(operations) {
 
   // 모든 명령어에 대한 처리가 끝난 후,
 
-  // 스택의 길이가 0이면
+  // 5. 스택의 길이가 0이면
   // [0, 0] 리턴
   if (stack.length === 0) {
     answer = [0, 0];
 
-    // 스택의 길이가 1이상이면
+    // 6. 스택의 길이가 1이상이면
     // [최댓값, 최솟값] 리턴
   } else {
     answer = [stack[stack.length - 1], stack[0]];
