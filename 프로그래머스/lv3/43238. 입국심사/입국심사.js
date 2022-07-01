@@ -14,7 +14,7 @@ function solution(n, times) {
   let minDays = right;
 
   // 이분 탐색의 진행 조건
-  while(left < right-1) {
+  while (left <= right) {
     // left와 right의 중간에 mid를 설정
     let mid = Math.floor((left + right) / 2);
 
@@ -23,20 +23,19 @@ function solution(n, times) {
     times.forEach((time) => {
       // mid일 동안 각 심사관이 심사할 수 있는 사람의 수를 누적
       totalPersonCnt = totalPersonCnt + Math.floor(mid / time);
-
-      // 만약 totalPersonCnt가 n보다 크다면 (= mid일동안 n명보다 많은 수의 사람을 심사할 수 있다면)
-      if (totalPersonCnt >= n) {
-        // minDays를 갱신
-        minDays = Math.min(mid, minDays);
-        return;
-      }
     });
+
+    // 만약 totalPersonCnt가 n보다 크다면 (= mid일동안 n명보다 많은 수의 사람을 심사할 수 있다면)
+    if (totalPersonCnt >= n) {
+      // minDays를 갱신
+      minDays = Math.min(mid, minDays);
+    }
 
     // totalPersonCnt에 따라 새로운 이분탐색을 위한 left, right값 조정
     if (totalPersonCnt >= n) {
-      right = mid;
+      right = mid - 1;
     } else {
-      left = mid;
+      left = mid + 1;
     }
   }
 
