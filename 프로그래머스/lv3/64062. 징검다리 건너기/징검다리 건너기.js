@@ -34,23 +34,25 @@ function solution(stones, k) {
   let left = 1;
   let right = 200000000;
   let mid;
+  let min = left;
 
   // left가 right-1이 될 때까지 반복
   // left가 right-1이 되면, 반복문이 종료됨
-  while (left < right - 1) {
+  while (left <= right) {
     mid = Math.floor((left + right) / 2);
 
     // checkStone이 true를 리턴하면
     // left를 mid로 변경함
     if (checkStone(stones, mid, k)) {
-      left = mid;
+      left = mid + 1;
+      min = Math.max(mid, min);
     } else {
-      right = mid;
+      right = mid - 1;
     }
   }
 
   // 찾은 값인 left 리턴
-  return left;
+  return min;
 }
 
 // 문제 풀이 접근 방식
